@@ -12,7 +12,7 @@ var send = primeSend
 var trim = strings.TrimSpace
 var low = strings.ToLower
 
-func uci(fromGUI chan string, send func(text ...string)) {
+func uci(fromGUI chan string) {
 	send("info string Inside UCI")
 	fromEngine, toEngine := engine()
 	quit := false
@@ -32,9 +32,9 @@ func uci(fromGUI chan string, send func(text ...string)) {
 		switch words[0] {
 		case "uci":
 			handleUci()
-		case "isReady":
+		case "isready":
 			handleIsReady()
-		case "setOption":
+		case "setoption":
 			handleSetOption(words)
 		case "stop":
 			handleStop(toEngine)
@@ -47,7 +47,7 @@ func uci(fromGUI chan string, send func(text ...string)) {
 }
 
 func handleSetOption(option []string) {
-	send("info string set option", strings.Join(option, " "))
+	send("info string set option ", strings.Join(option, " "))
 	send("info string not yet implemented")
 }
 
